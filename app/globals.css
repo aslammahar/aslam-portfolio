@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* ── DARK (default) ── */
+:root {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --card: #161616;
+  --border: #222222;
+  --accent: #a855f7;
+  --accent-dim: rgba(168,85,247,0.12);
+  --accent-border: rgba(168,85,247,0.28);
+  --accent-glow: rgba(168,85,247,0.35);
+  --text: #f0f0f0;
+  --text2: #ffffff;
+  --muted: #888;
+  --muted2: #555;
+}
+
+/* ── LIGHT ── */
+[data-theme="light"] {
+  --bg: #f8f8f8;
+  --bg2: #efefef;
+  --card: #ffffff;
+  --border: #e0e0e0;
+  --accent: #9333ea;
+  --accent-dim: rgba(147,51,234,0.08);
+  --accent-border: rgba(147,51,234,0.25);
+  --accent-glow: rgba(147,51,234,0.25);
+  --text: #111111;
+  --text2: #000000;
+  --muted: #666;
+  --muted2: #999;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--accent); border-radius:2px; }
+
+.fade-up {
+  opacity:0; transform:translateY(24px);
+  transition:opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.visible { opacity:1; transform:translateY(0); }
+
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes pulse-glow { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.85)} }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+@keyframes spin { to{transform:rotate(360deg)} }
