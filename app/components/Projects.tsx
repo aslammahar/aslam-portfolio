@@ -21,42 +21,42 @@ const fivethech = [
 
 function ProjectCard({ p }: { p: typeof datatronex[0] }) {
   return (
-    <div style={{
-      background:"var(--card)", border:"1px solid var(--border)",
-      borderRadius:16, overflow:"hidden", transition:"all 0.3s", height:"100%",
-    }}
-    onMouseEnter={e => { const el=e.currentTarget as HTMLElement; el.style.borderColor=p.color+"55"; el.style.transform="translateY(-5px)"; el.style.boxShadow=`0 20px 44px rgba(0,0,0,0.25)`; }}
-    onMouseLeave={e => { const el=e.currentTarget as HTMLElement; el.style.borderColor="var(--border)"; el.style.transform="translateY(0)"; el.style.boxShadow="none"; }}
+    <div 
+      className="glass-card rounded-2xl overflow-hidden group h-full flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+      style={{ '--hover-color': p.color } as React.CSSProperties}
     >
       {/* Image */}
-      <div style={{ position:"relative", width:"100%", height:180, overflow:"hidden", background:"#0d0d0d" }}>
-        <Image src={`/projects/${p.slug}.jpg`} alt={p.name} fill
-          style={{ objectFit:"cover", objectPosition:"top left", transition:"transform 0.5s" }}
-          onMouseEnter={e => (e.currentTarget as HTMLElement).style.transform="scale(1.04)"}
-          onMouseLeave={e => (e.currentTarget as HTMLElement).style.transform="scale(1)"}
+      <div className="relative w-full h-[200px] overflow-hidden bg-[#0d0d0d]">
+        <Image 
+          src={`/projects/${p.slug}.jpg`} 
+          alt={p.name} 
+          fill
+          className="object-cover object-[top_left] transition-transform duration-700 group-hover:scale-105"
         />
         {/* Company badge */}
-        <div style={{
-          position:"absolute", top:10, left:10,
-          background:"rgba(0,0,0,0.8)", backdropFilter:"blur(8px)",
-          border:`1px solid ${p.color}44`,
-          color:p.color, fontSize:"0.68rem", fontWeight:600, padding:"3px 10px", borderRadius:100,
-        }}>{p.company}</div>
+        <div 
+          className="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-[0.7rem] font-semibold px-3 py-1 rounded-full z-10 border"
+          style={{ borderColor: `${p.color}44`, color: p.color }}
+        >
+          {p.company}
+        </div>
         {/* Accent color line bottom */}
-        <div style={{ position:"absolute", bottom:0, left:0, right:0, height:2, background:p.color }} />
+        <div className="absolute bottom-0 left-0 right-0 h-1 z-10" style={{ background: p.color }} />
       </div>
 
       {/* Content */}
-      <div style={{ padding:"18px 20px" }}>
-        <h3 style={{ fontSize:"0.96rem", fontWeight:700, marginBottom:8, color:"var(--text2)" }}>{p.name}</h3>
-        <p style={{ fontSize:"0.8rem", color:"var(--muted)", lineHeight:1.65, marginBottom:14 }}>{p.desc}</p>
-        <div style={{ display:"flex", flexWrap:"wrap", gap:5 }}>
+      <div className="p-5 flex-1 flex flex-col">
+        <h3 className="text-lg font-bold mb-2 text-text-main group-hover:text-[var(--hover-color)] transition-colors">{p.name}</h3>
+        <p className="text-sm text-text-muted leading-relaxed mb-4 flex-1">{p.desc}</p>
+        <div className="flex flex-wrap gap-2 mt-auto">
           {p.tech.map(t => (
-            <span key={t} style={{
-              background:`${p.color}12`, border:`1px solid ${p.color}30`,
-              color:p.color, fontSize:"0.68rem", fontWeight:500,
-              padding:"2px 9px", borderRadius:100,
-            }}>{t}</span>
+            <span 
+              key={t} 
+              className="text-[0.7rem] font-medium px-2.5 py-1 rounded-full border bg-opacity-10 dark:bg-opacity-20"
+              style={{ backgroundColor: `${p.color}15`, borderColor: `${p.color}30`, color: p.color }}
+            >
+              {t}
+            </span>
           ))}
         </div>
       </div>
@@ -66,47 +66,39 @@ function ProjectCard({ p }: { p: typeof datatronex[0] }) {
 
 function Section({ title, projects, label }: { title: string; projects: typeof datatronex; label: string }) {
   return (
-    <>
+    <div className="mb-14">
       <ScrollReveal>
-        <div style={{
-          display:"flex", alignItems:"center", gap:16, marginBottom:24,
-        }}>
-          <span style={{
-            background:"var(--accent-dim)", border:"1px solid var(--accent-border)",
-            color:"var(--accent)", fontSize:"0.72rem", fontWeight:700,
-            padding:"4px 12px", borderRadius:100, textTransform:"uppercase", letterSpacing:"0.08em",
-            whiteSpace:"nowrap",
-          }}>{label}</span>
-          <div style={{ flex:1, height:1, background:"var(--border)" }} />
+        <div className="flex items-center gap-4 mb-8">
+          <span className="bg-accent-dim border border-accent-border text-accent text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest whitespace-nowrap">
+            {label}
+          </span>
+          <div className="flex-1 h-[1px] bg-border" />
         </div>
       </ScrollReveal>
-      <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(300px,1fr))", gap:18, marginBottom:52 }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {projects.map((p,i) => (
           <ScrollReveal key={i} delay={i*70}>
             <ProjectCard p={p} />
           </ScrollReveal>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
 export default function Projects() {
   return (
-    <section id="projects" style={{ padding:"100px 40px", background:"var(--bg2)" }}>
-      <div style={{ maxWidth:1200, margin:"0 auto" }}>
+    <section id="projects" className="py-24 md:py-32 px-6 md:px-12 bg-bg-subtle relative">
+      <div className="max-w-[1200px] mx-auto z-10 relative">
         <ScrollReveal>
-          <div style={{ textAlign:"center", marginBottom:64 }}>
-            <div style={{
-              display:"inline-flex", alignItems:"center", gap:8,
-              background:"var(--accent-dim)", border:"1px solid var(--accent-border)",
-              color:"var(--accent)", fontSize:"0.8rem", fontWeight:500,
-              padding:"6px 14px", borderRadius:100, marginBottom:16,
-            }}>My Work</div>
-            <h2 style={{ fontSize:"clamp(1.8rem,4vw,2.8rem)", fontWeight:700, letterSpacing:"-0.02em", color:"var(--text2)" }}>
+          <div className="text-center mb-16 md:mb-20">
+            <div className="inline-flex items-center gap-2 bg-accent-dim border border-accent-border text-accent hover:bg-accent hover:text-white transition-colors duration-300 text-sm font-semibold px-5 py-1.5 rounded-full mb-5 cursor-default">
+              My Work
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-text-main">
               Featured Projects
             </h2>
-            <p style={{ color:"var(--muted)", marginTop:12, fontSize:"0.95rem" }}>
+            <p className="text-text-muted mt-4 text-base md:text-lg max-w-2xl mx-auto">
               Real-world Laravel & PHP applications built across 3 companies
             </p>
           </div>

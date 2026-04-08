@@ -12,59 +12,87 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const links = [["#home","Home"],["#experience","Experience"],["#projects","Projects"],["#skills","Skills"],["#contact","Contact"]];
+  const links = [
+    ["#home", "Home"],
+    ["#experience", "Experience"],
+    ["#projects", "Projects"],
+    ["#skills", "Skills"],
+    ["#contact", "Contact"]
+  ];
 
   return (
-    <nav style={{
-      position:"fixed", top:0, left:0, right:0, zIndex:100,
-      padding:"0 40px", height:64,
-      display:"flex", justifyContent:"space-between", alignItems:"center",
-      background: scrolled ? "rgba(var(--bg-rgb, 10,10,10),0.95)" : "transparent",
-      backdropFilter: scrolled ? "blur(20px)" : "none",
-      borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
-      backgroundColor: scrolled ? "var(--bg)" : "transparent",
-      transition:"all 0.3s ease",
-    }}>
+    <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ease-in-out px-6 md:px-10 h-16 md:h-20 flex justify-between items-center ${
+      scrolled 
+        ? "bg-bg-subtle/80 backdrop-blur-xl border-b border-border shadow-sm" 
+        : "bg-transparent border-b border-transparent"
+    }`}>
       {/* Logo */}
-      <a href="#home" style={{ textDecoration:"none", display:"flex", alignItems:"center", gap:10 }}>
-        <div style={{
-          width:34, height:34, background:"var(--accent)", borderRadius:9,
-          display:"flex", alignItems:"center", justifyContent:"center",
-          fontWeight:700, fontSize:"0.85rem", color:"#fff",
-          boxShadow:"0 4px 12px var(--accent-glow)",
-        }}>AB</div>
-        <span style={{ color:"var(--text2)", fontWeight:600, fontSize:"1rem" }}>Aslam Baig</span>
+      <a href="#home" className="flex items-center gap-3 no-underline group">
+        <div className="w-9 h-9 md:w-10 md:h-10 bg-accent rounded-xl flex items-center justify-center font-bold text-sm text-white shadow-[0_4px_12px_var(--color-accent-glow)] group-hover:scale-105 transition-transform duration-300">
+          AB
+        </div>
+        <span className="text-text-main font-bold text-lg hidden sm:block">Aslam Baig</span>
       </a>
 
-      {/* Links */}
-      <ul style={{ display:"flex", gap:4, listStyle:"none" }}>
+      {/* Desktop Links */}
+      <ul className="hidden md:flex gap-1 lg:gap-2 list-none m-0 p-0">
         {links.map(([href, label]) => (
           <li key={href}>
-            <a href={href} style={{
-              color:"var(--muted)", textDecoration:"none",
-              fontSize:"0.875rem", fontWeight:500,
-              padding:"6px 14px", borderRadius:8,
-              transition:"all 0.2s", display:"block",
-            }}
-            onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.color="var(--text)"; el.style.background="var(--accent-dim)"; }}
-            onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.color="var(--muted)"; el.style.background="transparent"; }}
-            >{label}</a>
+            <a 
+              href={href} 
+              className="text-text-muted hover:text-text-main hover:bg-accent-dim text-sm lg:text-base font-medium px-4 py-2 rounded-lg transition-all duration-200 block"
+            >
+              {label}
+            </a>
           </li>
         ))}
       </ul>
 
-      {/* Right: theme toggle + hire me */}
-      <div style={{ display:"flex", alignItems:"center", gap:12 }}>
+      {/* Right: Theme toggle + Hire Me + Mobile Menu Toggle */}
+      <div className="flex items-center gap-3 md:gap-4">
         <ThemeToggle />
-        <a href="mailto:aslambaig3141@gmail.com" style={{
-          background:"var(--accent)", color:"#fff",
-          padding:"8px 20px", borderRadius:9,
-          fontWeight:600, fontSize:"0.875rem", textDecoration:"none",
-          transition:"all 0.2s", boxShadow:"0 4px 14px var(--accent-glow)",
-        }}
-        onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.opacity="0.85"; el.style.transform="translateY(-1px)"; }}
-        onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.opacity="1"; el.style.transform="translateY(0)"; }}
-        >Hire Me</a>
+        <a 
+          href="mailto:aslambaig3141@gmail.com" 
+          className="hidden sm:inline-block bg-accent text-white px-5 py-2 md:py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 shadow-[0_4px_14px_var(--color-accent-glow)] hover:opacity-90 hover:-translate-y-[1px]"
+        >
+          Hire Me
+        </a>
+        
+        {/* Mobile menu button */}
+        <button 
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden flex flex-col gap-1.5 p-2"
+          aria-label="Toggle Menu"
+        >
+          <span className={`block w-6 h-[2px] bg-text-main transition-transform ${menuOpen ? 'rotate-45 translate-y-[8px]' : ''}`}></span>
+          <span className={`block w-6 h-[2px] bg-text-main transition-opacity ${menuOpen ? 'opacity-0' : ''}`}></span>
+          <span className={`block w-6 h-[2px] bg-text-main transition-transform ${menuOpen ? '-rotate-45 -translate-y-[8px]' : ''}`}></span>
+        </button>
+      </div>
+
+      {/* Mobile Links Dropdown */}
+      <div className={`absolute top-full left-0 right-0 bg-bg-base/95 backdrop-blur-xl border-b border-border shadow-lg md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? 'max-h-80 opacity-100 py-4' : 'max-h-0 opacity-0 py-0'}`}>
+        <ul className="flex flex-col px-6 gap-2 m-0 p-0">
+          {links.map(([href, label]) => (
+            <li key={href}>
+              <a 
+                href={href} 
+                className="text-text-muted hover:text-accent text-base font-medium py-3 border-b border-border/50 block w-full"
+                onClick={() => setMenuOpen(false)}
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+          <li className="pt-2 sm:hidden">
+            <a 
+              href="mailto:aslambaig3141@gmail.com" 
+              className="text-accent font-semibold block py-2"
+            >
+              Hire Me &rarr;
+            </a>
+          </li>
+        </ul>
       </div>
     </nav>
   );

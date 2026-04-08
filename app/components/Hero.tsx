@@ -37,121 +37,80 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="home" ref={ref} style={{
-      minHeight: "100vh",
-      display: "flex", alignItems: "center",
-      padding: "88px 40px 60px",
-      position: "relative", overflow: "hidden",
-      background: "var(--bg)",
-    }}>
-      {/* Glows */}
-      <div style={{ position:"absolute", top:"10%", right:"5%", width:550, height:550, background:"radial-gradient(circle, var(--accent-dim) 0%, transparent 65%)", pointerEvents:"none" }} />
-      <div style={{ position:"absolute", bottom:"5%", left:"0%", width:350, height:350, background:"radial-gradient(circle, var(--accent-dim) 0%, transparent 65%)", pointerEvents:"none" }} />
+    <section id="home" ref={ref} className="min-h-screen flex items-center pt-28 pb-16 px-6 md:px-12 relative overflow-hidden bg-bg-base">
+      {/* Background Glows */}
+      <div className="absolute top-[10%] right-[5%] w-[300px] h-[300px] md:w-[550px] md:h-[550px] bg-[radial-gradient(circle,var(--color-accent-dim)_0%,transparent_65%)] pointer-events-none" />
+      <div className="absolute bottom-[5%] left-[0%] w-[250px] h-[250px] md:w-[350px] md:h-[350px] bg-[radial-gradient(circle,var(--color-secondary-dim)_0%,transparent_65%)] pointer-events-none" />
 
-      <div style={{ maxWidth:1200, margin:"0 auto", width:"100%", display:"grid", gridTemplateColumns:"1fr 1fr", gap:60, alignItems:"center" }}>
+      <div className="max-w-[1200px] mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center relative z-10">
 
-        {/* LEFT */}
-        <div>
-          <div className="fade-up" style={{
-            display:"inline-flex", alignItems:"center", gap:8,
-            background:"var(--accent-dim)", border:"1px solid var(--accent-border)",
-            color:"var(--accent)", fontSize:"0.82rem", fontWeight:500,
-            padding:"6px 16px", borderRadius:100, marginBottom:28,
-          }}>
-            <span style={{ width:7,height:7,background:"var(--accent)",borderRadius:"50%",display:"inline-block",animation:"pulse-glow 2s infinite" }} />
+        {/* LEFT SECTION */}
+        <div className="order-2 md:order-1 text-center md:text-left">
+          <div className="fade-up inline-flex items-center gap-2 bg-accent-dim border border-accent-border text-accent-hover text-xs font-medium px-4 py-1.5 rounded-full mb-6">
+            <span className="w-2 h-2 bg-accent rounded-full animate-pulse-glow" />
             Available for new projects
           </div>
 
-          <h1 className="fade-up" style={{
-            fontSize:"clamp(2.6rem, 5vw, 4.2rem)", fontWeight:700, lineHeight:1.1,
-            letterSpacing:"-0.02em", marginBottom:16, color:"var(--text2)",
-          }}>
+          <h1 className="fade-up text-4xl md:text-5xl lg:text-7xl font-bold leading-tight tracking-tight mb-4 text-text-main">
             Hi, I&apos;m{" "}
-            <span style={{ background:"linear-gradient(135deg, var(--accent), #7c3aed)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
+            <span className="text-gradient drop-shadow-md">
               Aslam Baig
             </span>
           </h1>
 
-          <div className="fade-up" style={{ fontSize:"1.2rem", marginBottom:24, height:38, display:"flex", alignItems:"center", gap:4 }}>
-            <span style={{ color:"var(--accent)", fontWeight:600 }}>{displayed}</span>
-            <span style={{ width:2,height:22,background:"var(--accent)",display:"inline-block",animation:"blink 1s infinite",borderRadius:1 }} />
+          <div className="fade-up text-lg md:text-xl mb-6 h-10 flex items-center justify-center md:justify-start gap-1">
+            <span className="text-secondary font-semibold">{displayed}</span>
+            <span className="w-[2px] h-[22px] bg-secondary inline-block animate-blink rounded-sm" />
           </div>
 
-          <p className="fade-up" style={{ color:"var(--muted)", fontSize:"0.975rem", lineHeight:1.8, maxWidth:460, marginBottom:40 }}>
+          <p className="fade-up text-text-muted text-base md:text-lg leading-relaxed max-w-[460px] mb-8 mx-auto md:mx-0">
             Dedicated PHP Laravel Developer with{" "}
-            <strong style={{ color:"var(--text)" }}>2.5+ years</strong> of experience building robust web applications, enterprise CRM/ERP systems, and scalable backend solutions.
+            <strong className="text-text-main font-semibold">2.5+ years</strong> of experience building robust web applications, enterprise CRM/ERP systems, and scalable backend solutions.
           </p>
 
-          <div className="fade-up" style={{ display:"flex", gap:12, flexWrap:"wrap", marginBottom:52 }}>
-            <a href="#projects" style={{
-              background:"var(--accent)", color:"#fff",
-              padding:"12px 28px", borderRadius:10, fontWeight:600, fontSize:"0.9rem",
-              textDecoration:"none", transition:"all 0.2s", display:"inline-block",
-              boxShadow:"0 4px 20px var(--accent-glow)",
-            }}
-            onMouseEnter={e => { const el=e.currentTarget as HTMLElement; el.style.transform="translateY(-2px)"; el.style.boxShadow="0 8px 28px var(--accent-glow)"; }}
-            onMouseLeave={e => { const el=e.currentTarget as HTMLElement; el.style.transform="translateY(0)"; el.style.boxShadow="0 4px 20px var(--accent-glow)"; }}
-            >View My Work</a>
-            <a href="#contact" style={{
-              background:"transparent", color:"var(--text)",
-              padding:"12px 28px", borderRadius:10, fontWeight:600, fontSize:"0.9rem",
-              textDecoration:"none", border:"1px solid var(--border)", transition:"all 0.2s", display:"inline-block",
-            }}
-            onMouseEnter={e => { const el=e.currentTarget as HTMLElement; el.style.borderColor="var(--accent-border)"; el.style.color="var(--accent)"; }}
-            onMouseLeave={e => { const el=e.currentTarget as HTMLElement; el.style.borderColor="var(--border)"; el.style.color="var(--text)"; }}
-            >Contact Me</a>
+          <div className="fade-up flex flex-wrap gap-4 justify-center md:justify-start mb-12">
+            <a href="#projects" className="bg-accent text-white px-8 py-3 rounded-xl font-semibold text-sm md:text-base transition-all duration-300 shadow-[0_4px_20px_var(--color-accent-glow)] hover:shadow-[0_8px_28px_var(--color-accent-glow)] hover:-translate-y-1">
+              View My Work
+            </a>
+            <a href="#contact" className="bg-transparent text-text-main px-8 py-3 rounded-xl font-semibold text-sm md:text-base border border-border transition-all duration-300 hover:border-accent hover:text-accent">
+              Contact Me
+            </a>
           </div>
 
-          <div className="fade-up" style={{ display:"flex", gap:36 }}>
-            {[["2.5+","Years Exp"],["8+","Projects"],["3","Companies"]].map(([n,l]) => (
-              <div key={l} style={{ textAlign:"center" }}>
-                <div style={{ fontSize:"2rem", fontWeight:700, color:"var(--accent)", lineHeight:1 }}>{n}</div>
-                <div style={{ fontSize:"0.78rem", color:"var(--muted)", marginTop:5 }}>{l}</div>
+          <div className="fade-up flex gap-8 justify-center md:justify-start">
+            {[["2.5+", "Years Exp"], ["8+", "Projects"], ["3", "Companies"]].map(([n, l]) => (
+              <div key={l} className="text-center group">
+                <div className="text-2xl md:text-3xl font-bold text-accent leading-none mb-2 group-hover:scale-105 transition-transform">{n}</div>
+                <div className="text-xs md:text-sm text-text-muted">{l}</div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* RIGHT */}
-        <div className="fade-up" style={{ display:"flex", justifyContent:"center" }}>
-          <div style={{ position:"relative", width:340, height:420 }}>
-            <div style={{ position:"absolute", inset:-30, background:"radial-gradient(circle, var(--accent-glow) 0%, transparent 65%)", borderRadius:"50%", pointerEvents:"none" }} />
-            <div style={{
-              position:"relative", width:"100%", height:"100%",
-              background:"var(--card)", borderRadius:24,
-              border:"1px solid var(--border)", overflow:"hidden",
-              boxShadow:"0 40px 80px rgba(0,0,0,0.4)",
-              animation:"float 5s ease-in-out infinite",
-            }}>
-              <Image src="/profile.jpg" alt="Aslam Baig" fill priority
-                style={{ objectFit:"cover", objectPosition:"top center" }} />
-              <div style={{
-                position:"absolute", bottom:16, left:16, right:16,
-                background:"rgba(8,8,8,0.88)", backdropFilter:"blur(16px)",
-                borderRadius:12, padding:"12px 16px",
-                border:"1px solid var(--border)",
-                display:"flex", alignItems:"center", gap:12,
-              }}>
-                <div style={{
-                  width:38, height:38, background:"var(--accent-dim)",
-                  border:"1px solid var(--accent-border)",
-                  borderRadius:10, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"1.1rem",
-                }}>⚡</div>
+        {/* RIGHT SECTION */}
+        <div className="fade-up flex items-center justify-center order-1 md:order-2">
+          <div className="relative w-[280px] h-[350px] md:w-[340px] md:h-[420px]">
+            <div className="absolute -inset-6 bg-[radial-gradient(circle,var(--color-accent-dim)_0%,transparent_65%)] rounded-full pointer-events-none" />
+            <div className="relative w-full h-full glass-card rounded-[2rem] overflow-hidden animate-float">
+              <Image 
+                src="/profile.jpg" 
+                alt="Aslam Baig" 
+                fill 
+                priority
+                className="object-cover object-[top_center] hover:scale-105 transition-transform duration-700" 
+              />
+              {/* Floating Badge */}
+              <div className="absolute bottom-4 left-4 right-4 bg-bg-base/80 backdrop-blur-xl rounded-2xl p-3 border border-border flex items-center gap-3">
+                <div className="w-10 h-10 bg-accent/20 border border-accent/40 rounded-xl flex items-center justify-center text-xl shadow-[0_0_15px_var(--color-accent-dim)]">⚡</div>
                 <div>
-                  <div style={{ fontSize:"0.82rem", fontWeight:600, color:"#f0f0f0" }}>PHP Laravel Developer</div>
-                  <div style={{ fontSize:"0.72rem", color:"#f0f0f0" }}>Karachi, Pakistan</div>
+                  <div className="text-sm font-semibold text-text-main">PHP Laravel Developer</div>
+                  <div className="text-xs text-text-muted">Karachi, Pakistan</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <style>{`
-        @keyframes pulse-glow { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.45;transform:scale(0.8)} }
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-      `}</style>
     </section>
   );
 }

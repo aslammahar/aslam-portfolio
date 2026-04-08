@@ -20,58 +20,45 @@ const skills = [
   { name: "VS Code",    icon: "💻", level: 90, cat: "Tools" },
 ];
 
-const cats = ["All", "Backend", "Frontend", "CMS", "Tools"];
-
 export default function Skills() {
   return (
-    <section id="skills" style={{ padding: "100px 40px", background: "var(--bg)" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+    <section id="skills" className="py-24 md:py-32 px-6 md:px-12 bg-bg-base relative">
+      <div className="max-w-[1200px] mx-auto z-10 relative">
         <ScrollReveal>
-          <div style={{ textAlign: "center", marginBottom: 64 }}>
-            <div style={{
-              display: "inline-flex", alignItems: "center", gap: 8,
-              background: "var(--accent-dim)", border: "1px solid var(--accent-border)",
-              color: "var(--accent)", fontSize: "0.8rem", fontWeight: 500,
-              padding: "6px 14px", borderRadius: 100, marginBottom: 16,
-            }}>My Expertise</div>
-            <h2 style={{ fontSize: "clamp(1.8rem,4vw,2.8rem)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--text2)" }}>
+          <div className="text-center mb-16 md:mb-20">
+            <div className="inline-flex items-center gap-2 bg-accent-dim border border-accent-border text-accent text-sm font-semibold px-5 py-1.5 rounded-full mb-5 cursor-default hover:bg-accent hover:text-white transition-colors duration-300">
+              My Expertise
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-text-main">
               Skills & Technologies
             </h2>
-            <p style={{ color: "var(--muted)", marginTop: 12 }}>Tools I use to build robust web applications</p>
+            <p className="text-text-muted mt-4 text-base md:text-lg">
+              Tools I use to build robust web applications
+            </p>
           </div>
         </ScrollReveal>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 14 }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
           {skills.map((skill, i) => (
             <ScrollReveal key={i} delay={i * 45}>
-              <div style={{
-                background: "var(--card)", border: "1px solid var(--border)",
-                borderRadius: 14, padding: "18px 20px", transition: "all 0.3s",
-              }}
-              onMouseEnter={e => { const el=e.currentTarget as HTMLElement; el.style.borderColor="var(--accent-border)"; el.style.transform="translateY(-3px)"; el.style.boxShadow="0 12px 28px rgba(0,0,0,0.2)"; }}
-              onMouseLeave={e => { const el=e.currentTarget as HTMLElement; el.style.borderColor="var(--border)"; el.style.transform="translateY(0)"; el.style.boxShadow="none"; }}
-              >
-                <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 }}>
-                  <div style={{ display:"flex", alignItems:"center", gap:10 }}>
-                    <div style={{
-                      width:34, height:34, background:"var(--accent-dim)",
-                      border:"1px solid var(--accent-border)",
-                      borderRadius:8, display:"flex", alignItems:"center", justifyContent:"center",
-                      fontSize:"1rem",
-                    }}>{skill.icon}</div>
+              <div className="glass-card rounded-2xl p-5 md:p-6 transition-all duration-300 hover:border-accent-border hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(0,0,0,0.2)] group">
+                <div className="flex justify-between items-center mb-4">
+                  <div className="flex items-center gap-3 md:gap-4">
+                    <div className="w-10 h-10 md:w-11 md:h-11 bg-accent-dim border border-accent-border rounded-xl flex items-center justify-center text-lg md:text-xl shadow-inner group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                      {skill.icon}
+                    </div>
                     <div>
-                      <div style={{ fontWeight:600, fontSize:"0.88rem", color:"var(--text2)" }}>{skill.name}</div>
-                      <div style={{ fontSize:"0.68rem", color:"var(--muted)", marginTop:1 }}>{skill.cat}</div>
+                      <div className="font-semibold text-sm md:text-base text-text-main group-hover:text-accent transition-colors">{skill.name}</div>
+                      <div className="text-xs text-text-muted mt-0.5">{skill.cat}</div>
                     </div>
                   </div>
-                  <span style={{ color:"var(--accent)", fontSize:"0.82rem", fontWeight:700 }}>{skill.level}%</span>
+                  <span className="text-accent text-sm font-bold">{skill.level}%</span>
                 </div>
-                <div style={{ height:5, background:"var(--border)", borderRadius:3, overflow:"hidden" }}>
-                  <div style={{
-                    height:"100%", width:`${skill.level}%`,
-                    background:`linear-gradient(90deg, var(--accent), #7c3aed)`,
-                    borderRadius:3, transition:"width 1.2s ease",
-                  }} />
+                <div className="h-1.5 md:h-2 bg-border rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-accent to-secondary rounded-full transition-all duration-1000 ease-out"
+                    style={{ width: `${skill.level}%` }} 
+                  />
                 </div>
               </div>
             </ScrollReveal>
