@@ -53,10 +53,10 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 md:py-32 px-6 md:px-12 bg-bg-base relative">
+    <section id="experience" className="py-16 md:py-24 px-6 md:px-12 bg-bg-base relative">
       <div className="max-w-[900px] mx-auto z-10 relative">
         <ScrollReveal>
-          <div className="text-center mb-16 md:mb-20">
+          <div className="text-center mb-12 md:mb-16">
             <div className="inline-flex items-center gap-2 bg-accent-dim border border-accent-border text-accent hover:bg-accent hover:text-white transition-colors duration-300 text-sm font-semibold px-5 py-1.5 rounded-full mb-5 cursor-default">
               Professional Journey
             </div>

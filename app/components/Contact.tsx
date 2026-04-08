@@ -24,12 +24,12 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 px-6 md:px-12 bg-bg-base relative overflow-hidden">
+    <section id="contact" className="py-16 md:py-24 px-6 md:px-12 bg-bg-base relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-[radial-gradient(circle,var(--color-accent-dim)_0%,transparent_65%)] pointer-events-none" />
       
       <div className="max-w-[960px] mx-auto z-10 relative">
         <ScrollReveal>
-          <div className="text-center mb-16 md:mb-20">
+          <div className="text-center mb-12 md:mb-16">
             <div className="inline-flex items-center gap-2 bg-accent-dim border border-accent-border text-accent hover:bg-accent hover:text-white transition-colors duration-300 text-sm font-semibold px-5 py-1.5 rounded-full mb-5 cursor-default">
               Get In Touch
             </div>

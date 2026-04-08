@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-base: #020617; /* Slate 950 */
-  --color-bg-subtle: #0f172a; /* Slate 900 */
-  --color-card: rgba(15, 23, 42, 0.6);
-  --color-border: rgba(51, 65, 85, 0.4);
+  --color-bg-base: var(--theme-bg-base);
+  --color-bg-subtle: var(--theme-bg-subtle);
+  --color-card: var(--theme-card);
+  --color-border: var(--theme-border);
   
   --color-accent: #06b6d4; /* Cyan 500 */
   --color-accent-hover: #0891b2; /* Cyan 600 */
-  --color-accent-dim: rgba(6, 182, 212, 0.1);
-  --color-accent-border: rgba(6, 182, 212, 0.25);
+  --color-accent-dim: var(--theme-accent-dim);
+  --color-accent-border: var(--theme-accent-border);
   
   --color-secondary: #8b5cf6; /* Violet 500 */
-  --color-secondary-dim: rgba(139, 92, 246, 0.1);
+  --color-secondary-dim: var(--theme-secondary-dim);
 
-  --color-text-main: #f8fafc; /* Slate 50 */
-  --color-text-muted: #94a3b8; /* Slate 400 */
+  --color-text-main: var(--theme-text-main);
+  --color-text-muted: var(--theme-text-muted);
   
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-glow: pulse-glow 3s infinite;
@@ -25,14 +25,32 @@
 
 @layer base {
   :root {
-    --bg: #020617;
-    --bg-rgb: 2, 6, 23;
-    --text: #f8fafc;
+    --theme-bg-base: #020617;
+    --theme-bg-subtle: #0f172a;
+    --theme-text-main: #f8fafc;
+    --theme-text-muted: #94a3b8;
+    --theme-card: rgba(15, 23, 42, 0.6);
+    --theme-border: rgba(51, 65, 85, 0.4);
+    --theme-accent-dim: rgba(6, 182, 212, 0.1);
+    --theme-accent-border: rgba(6, 182, 212, 0.25);
+    --theme-secondary-dim: rgba(139, 92, 246, 0.1);
+    
+    --bg: var(--theme-bg-base);
+    --text: var(--theme-text-main);
   }
   [data-theme="light"] {
-    --bg: #f8fafc;
-    --bg-rgb: 248, 250, 252;
-    --text: #020617;
+    --theme-bg-base: #ffffff;
+    --theme-bg-subtle: #f1f5f9;
+    --theme-text-main: #0f172a;
+    --theme-text-muted: #475569;
+    --theme-card: rgba(255, 255, 255, 0.8);
+    --theme-border: rgba(203, 213, 225, 0.8);
+    --theme-accent-dim: rgba(6, 182, 212, 0.08);
+    --theme-accent-border: rgba(6, 182, 212, 0.3);
+    --theme-secondary-dim: rgba(139, 92, 246, 0.08);
+    
+    --bg: var(--theme-bg-base);
+    --text: var(--theme-text-main);
   }
   
   *, *::before, *::after {
